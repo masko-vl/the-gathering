@@ -64,14 +64,6 @@ export const fetchCards = createAsyncThunk(
   }
 );
 
-export const fetchCardById = createAsyncThunk(
-  'cards/fetchCardById',
-  async (id: string) => {
-    const response = await getCards(1, 1, undefined, id);
-    return response.cards[0];
-  }
-);
-
 const cardSlice = createSlice({
   name: 'cards',
   initialState,
@@ -108,19 +100,6 @@ const cardSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message || 'Failed to fetch cards';
       })
-      // Handle fetchCardById
-      .addCase(fetchCardById.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchCardById.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.selectedCard = action.payload;
-        state.error = null;
-      })
-      .addCase(fetchCardById.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message || 'Failed to fetch card';
-      });
   }
 });
 
