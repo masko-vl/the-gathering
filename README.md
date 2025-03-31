@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# The Gathering
 
-## Getting Started
+A web application for browsing and filtering Magic: The Gathering cards.
 
-First, run the development server:
+## Installation
+
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/masko-vl/the-gathering.git
+cd the-gathering
+npm install
+```
+
+## Running the Application
+
+To start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Card List**: Browse through Magic: The Gathering cards with pagination
+- **Card Details**: View detailed information about a specific card
+- **Search & Filtering**: Filter cards by name
+- **Responsive Design**: Optimized for both desktop and mobile devices
 
-## Learn More
+## Technical Decisions
 
-To learn more about Next.js, take a look at the following resources:
+### Architecture
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Next.js**: Chosen for its server-side rendering capabilities and optimized image handling
+- **Redux**: Used for global state management, particularly for card data and filtering state
+- **TypeScript**: Implemented for type safety and better developer experience
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Key Implementation Details
 
-## Deploy on Vercel
+- **Card Filtering**: Implemented with debounced search to minimize API calls while typing
+- **API Integration**: Created reusable API helper functions that handle pagination and error states
+- **Component Structure**: Used a modular approach with reusable components like `CardItem`
+- **Image Handling**: Configured Next.js to properly handle remote images from the Magic API
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Performance Considerations
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Used Next.js Image component for optimized image loading
+- Implemented pagination to limit the number of cards loaded at once
+- Added debouncing for search functionality to reduce API calls
+
+## Testing
+
+The application uses Jest and React Testing Library for testing. To run the tests:
+
+```bash
+npm run test
+```
+
+For watching test files during development:
+
+```bash
+npm run test:watch
+```
+

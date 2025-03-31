@@ -3,26 +3,14 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { getCards } from '@/app/helpers/apis';
 import Link from 'next/link';
+import Image from 'next/image';
+import { ICard } from '@/app/types';
 
-interface Card {
-  id: string;
-  name: string;
-  type: string;
-  imageUrl?: string;
-  text?: string;
-  flavor?: string;
-  artist?: string;
-  setName?: string;
-  rarity?: string;
-  colors?: string[];
-  manaCost?: string;
-}
-
-export default function CardDetail() {
+const CardDetail = () => {
   const params = useParams();
   const cardId = params?.id as string;
   
-  const [card, setCard] = useState<Card | null>(null);
+  const [card, setCard] = useState<ICard | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   
@@ -86,9 +74,11 @@ export default function CardDetail() {
         <div className="md:w-1/3">
           {card.imageUrl ? (
             <div className="sticky top-6 w-full">
-              <img
+              <Image
                 src={card.imageUrl}
                 alt={card.name}
+                width={223}
+                height={310}
                 className="w-full rounded-xl shadow-lg"
                 onError={() => {
                   console.error('Image failed to load:', card.imageUrl);
@@ -154,3 +144,5 @@ export default function CardDetail() {
     </div>
   );
 }
+
+export default CardDetail;

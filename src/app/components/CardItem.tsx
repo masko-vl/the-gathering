@@ -1,19 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import { ICard } from '../types';
 
-interface Card {
-  id: string;
-  name: string;
-  type: string;
-  imageUrl?: string;
-}
-
-interface CardItemProps {
-  card: Card;
-}
-
-const CardItem: React.FC<CardItemProps> = ({ card }) => {
+const CardItem = ({ card }: {card: ICard}) => {
   return (
     <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100">
       {card.imageUrl ? (

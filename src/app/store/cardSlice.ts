@@ -1,43 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { getCards } from '../helpers/apis';
+import { ICardState } from '../types';
 
-interface Card {
-  id: string;
-  name: string;
-  type: string;
-  imageUrl?: string;
-  text?: string;
-  flavor?: string;
-  artist?: string;
-  setName?: string;
-  rarity?: string;
-  colors?: string[];
-  manaCost?: string;
-}
-
-interface Pagination {
-  currentPage: number;
-  pageSize: number;
-  totalCount: number;
-  count: number;
-}
-
-interface RateLimit {
-  limit: number;
-  remaining: number;
-}
-
-interface CardState {
-  cards: Card[];
-  selectedCard: Card | null;
-  pagination: Pagination;
-  rateLimit: RateLimit;
-  searchFilter: string;
-  status: 'idle' | 'loading' | 'succeeded' | 'failed';
-  error: string | null;
-}
-
-const initialState: CardState = {
+const initialState: ICardState = {
   cards: [],
   selectedCard: null,
   pagination: {

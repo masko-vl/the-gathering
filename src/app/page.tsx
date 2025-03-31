@@ -4,15 +4,9 @@ import { useDebounce } from './hooks/useDebounce';
 import CardItem from './components/CardItem';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { fetchCards, setSearchFilter } from './store/cardSlice';
+import { ICard } from './types';
 
-interface Card {
-  id: string;
-  name: string;
-  type: string;
-  imageUrl?: string;
-}
-
-const ListCards: React.FC = () => {
+const ListCards = () => {
   const dispatch = useAppDispatch();
   const { cards, pagination, rateLimit, searchFilter, status, error } = useAppSelector(state => state.cards);
   const debouncedSearchFilter = useDebounce(searchFilter, 500);
@@ -98,12 +92,10 @@ const ListCards: React.FC = () => {
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {cards.map((card: Card) => (
+        {cards.map((card: ICard) => (
           <CardItem key={card.id} card={card} />
         ))}
       </div>
-      
-      {/* Pagination Controls */}
       <div className="mt-12 flex justify-center gap-4 items-center">
         <button
           onClick={handlePrevPage}
